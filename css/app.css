@@ -1,0 +1,310 @@
+/*global*/
+html,body {
+	font-size: 62.5%;
+	background: #FFFFFF;
+	width: 100%;
+    height: 100%;
+}
+.title{
+	color: #6d6d72;
+	font-size: 1.5rem;
+}
+.mui-content{
+	background: #FFFFFF;
+}
+._title{
+	color: #fff;
+    font-size: 1.8rem;
+}
+.icon-color{
+	color: white;
+}
+/*自定义带有颜色bar*/
+._bar-bc{
+	background: #02b6f1;
+}
+._back{
+	color: white;
+}
+._placehodel{
+	height: 44px;
+}
+
+/*login*/
+/*.container {
+	width: 100%;
+	height: 100%;
+}*/
+
+.logo {
+	height: 30%;
+	text-align: center;
+	/*border: 1px solid black;*/
+}
+
+.logo img {
+	margin-top: 15%;
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 8%;
+}
+
+.container>.loginForm {
+	height: 40%;
+	padding: 0 2rem 0 2rem;
+	/*border: 1px solid black;*/
+}
+
+.formItem {
+	height: 4rem;
+	border-bottom: 1px solid #e6e6e6;
+	margin-bottom: 1.5rem;
+}
+
+.formItem label {
+	line-height: 4rem;
+	height: 2rem;
+}
+
+.formItem img {
+	width: 1.5rem;
+	height: 1.5rem;
+	margin-bottom: -4px;
+}
+
+.formItem input {
+	width: 60%;
+	height: 1.5rem;
+	font-size: 1.4rem;
+	border: 1px solid #fff;
+	outline: none;
+	-webkit-appearance: none;
+	padding: 1rem .4rem;
+}
+.formItem span {
+	display: inline-block;
+	color: #02b6f1;
+	padding: .3rem;
+	font-size: 1.2rem;
+	border: 1px solid #02b6f1;
+	border-radius: .3rem;
+}
+
+.btn {
+	margin-top: 3.5rem;
+    height: 3.6rem;
+    width: 100%;
+    text-align: center;
+    line-height: 3.6rem;
+    font-size: 1.6rem;
+    background: #02b6f1;
+    border-radius: .3rem;
+    color: white;
+    padding: 0;
+    border: none;
+}
+
+.check {
+	margin-top: 1.5rem;
+	display: block;
+	font-size: 1.3rem;
+}
+/*实名认证*/
+.real{
+	height: 30%;
+	text-align: center;
+}
+.real img{
+	margin-top: 10%;
+    width: 7rem;
+    height: 6rem;
+    margin-bottom: 8%;
+}
+.realItem {
+	height: 4rem;
+	border-bottom: 1px solid #e8e9ea;
+	margin-bottom: 1.5rem;
+}
+
+.realItem label {
+	line-height: 4rem;
+	height: 2rem;
+}
+.realItem span{
+	font-size: 1.5rem;
+}
+.realItem input {
+	width: 60%;
+	height: 1.5rem;
+	font-size: 1.4rem;
+	border: 1px solid #fff;
+	outline: none;
+	-webkit-appearance: none;
+	padding: 1rem .4rem;
+}
+.real-check{
+	margin-top: 1.8rem;
+	display: block;
+	font-size: 1.3rem;
+	color: #6c7d8e;
+}
+.real-btn{
+	margin-top: 4rem;
+	height: 3.6rem;
+    width: 100%;
+    text-align: center;
+    line-height: 3.6rem;
+    font-size: 1.6rem;
+    background: #02b6f1;
+    border-radius: .3rem;
+    color: white;
+    padding: 0;
+    border: none;
+}
+/*个人中心*/
+.door-container{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #02b6f1;
+}
+.center-top{
+	height: 22rem;
+	background: #02b6f1;
+	text-align: center;
+}
+.center-top img{
+	margin-top: 6rem;
+	width: 8rem;
+	height: 8rem;
+	border-radius: 50%;
+}
+.center-top p{
+	color: #fff;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+}
+._cell{
+	padding: 14px 15px;	
+	font-size: 1.4rem;
+}
+._icon{
+	width: 2rem;
+    margin-bottom: -5px;
+    margin-right: 10px;
+}
+/*首页*/
+.checkDoor{
+	height: 12rem;
+    background: #02b6f1;
+    padding-top: 7rem;
+}
+.doorInfo{
+	width: 92%;
+    height: 3.5rem;
+    background: white;
+    border-radius: .6rem;
+    margin: 0 auto;
+    line-height: 3.6rem;
+    font-size: 1.4rem;
+    padding-left: .8rem;
+    color: #333333;
+}
+.door-icon{
+	float: right;
+    margin-top: .45rem;
+    margin-right: .4rem;
+
+}
+/*轮播图*/
+._swiper-container{
+	height: 40rem;
+    background: #02b6f1;
+    text-align: center;
+}
+.door-img{
+	display: inline-block;
+	width: 17rem!important;
+    height: 17rem;
+    background-image: url(../img/door/door.png);
+    background-size:contain ;
+    margin-top: 5rem;
+}
+.door-img-open{
+	background-image: url(../img/door/door-open.png);
+	background-size:contain ;
+	background-repeat: no-repeat;
+}
+.door-msg{
+	margin-top: 10.5rem;
+	color: rgb(3,177,234);
+	font-size: 1.4rem;
+}
+.door-worn{
+	clear: both;
+	font-size: 1.2rem;
+	margin-top: -1.5rem;
+}
+.door-name{
+	color: white;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+}
+.dev-info{
+	width: 60%;
+	height: 2rem;
+	margin: 0 auto;
+	padding-top: .4rem;
+}
+.dev-line{
+	width: 49%;
+    float: left;
+}
+.dev-signal{
+	width: 49%;
+    float: left;
+}
+.dev{
+	color: white;
+	font-size: 1.4rem;
+	padding-left: 3px;
+}
+._line{
+	margin-left: -.6rem;
+}
+/*联系客服*/
+/*设置*/
+._right-info {
+	font-style: normal;
+	color: #999999;
+	margin-right: 20px;
+	font-size: 1.5rem
+}
+._right-info-no {
+	font-style: normal;
+	color: #999999;
+	font-size: 1.5rem
+}
+.goOut{
+	width: 88%;
+    margin: 4rem 6%;
+    height: 3.6rem;
+    padding: 0;
+    border: none;
+    text-align: center;
+    line-height: 3.6rem;
+    color: white;
+    font-size: 1.6rem;
+    background: #02b6f1;
+    border-radius: .3rem;
+}
+/*关于我们*/
+.version{
+	text-align: center;
+	font-size: 1.6rem;
+}
+.copyright{
+	text-align: center;
+	font-size: 1.6rem;
+	margin-top: 1.6rem;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+</head>
+<body>
+<div class="mui-content">
+		<header class="mui-bar mui-bar-nav _bar-bc">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left _back"></a>
+			<h1 id="title" class="mui-title _title">设置</h1>
+		</header>
+		<div class="_placehodel"></div>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell _cell">
+					实名信息
+					<i class="mui-pull-right _right-info-no realInfo">程安康/4105*****5555</i>
+			</li>
+			<li class="mui-table-view-cell _cell _about">
+				<a class="mui-navigate-right">
+					关于我们
+				</a>
+			</li>
+			<li class="mui-table-view-cell _cell">
+				<a class="mui-navigate-right">
+					检查新版本
+					<i class="mui-pull-right _right-info">V1.0.0</i>
+				</a>
+			</li>
+		</ul>
+		<button type="button" class="mui-btn goOut">退出登录</button>
+		<!--<p class="goOut">
+				退出登录
+			</p>-->
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript" src="../js/jquery-1.10.2.min.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui('._about').on('tap', 'a', function(e) {
+				mui.openWindow({
+				    url: '../components/about.html', 
+				    id:'about'
+				  });
+			})
+			mui.plusReady(function() {
+				var nameStr = common.getLocVal('name');
+				var cardStr = common.getLocVal('idcard');
+//				console.log(cardStr)
+//				console.log(cardStr.slice(-4))
+//				console.log(cardStr.slice(0,4))
+				var cardInfo = cardStr?nameStr+'/'+cardStr.slice(0,4)+'*****'+cardStr.slice(-4):'无实名信息';
+				//获取手机号隐藏中间
+				jQuery('.realInfo').html(cardInfo);
+			});
+			jQuery('.goOut').click(function(e) {
+				common.setLocVal('token','')
+				common.setLocVal('user_id','')
+				common.setLocVal('mobile','')
+				common.setLocVal('name','')
+				common.setLocVal('idcard','')
+				common.setLocVal('resultList','')
+				common.goBackRoot();
+			})
+		</script>
+</div>
+	
+</body>
+</html>

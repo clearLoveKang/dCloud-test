@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+</head>
+<body>
+<div class="mui-content">
+	<!--<div class="mui-control-content">-->
+		<header class="mui-bar mui-bar-transparent">
+			<h1 id="title" class="mui-title _title">个人中心</h1>
+		</header>
+		<div class="center-top">
+			<img src="../img/icon/phone_bj.png"/>
+			<p class="show-mobile">132****1216</p>
+		</div>
+		
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell _cell _customer">
+				<a class="mui-navigate-right">
+					<img class="_icon" src="../img/icon/lxkf.png"/>
+					联系客服
+				</a>
+			</li>
+			<li class="mui-table-view-cell _cell install">
+				<a class="mui-navigate-right">
+					<img class="_icon" src="../img/icon/sz.png"/>
+					设置
+				</a>
+			</li>
+			<!--<li class="mui-table-view-cell _cell _real">
+				<a class="mui-navigate-right">
+					<img class="_icon" src="../img/icon/kjx.png"/>
+					科技下初始化
+				</a>
+			</li>-->
+			<!--预留预览页面-->
+			<!--<li class="mui-table-view-cell _cell mi_login">
+				<a class="mui-navigate-right">
+					<img class="_icon" src="../img/icon/kjx.png"/>
+					预览登录
+				</a>
+			</li>
+			<li class="mui-table-view-cell _cell mi_real">
+				<a class="mui-navigate-right">
+					<img class="_icon" src="../img/icon/kjx.png"/>
+					预览实名认证
+				</a>
+			</li>-->
+		</ul>
+	<!--</div>-->
+</div>
+	<script type="text/javascript" src="../js/common.js" ></script>
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js" ></script>
+	<script type="text/javascript" charset="utf-8">
+//		alert(123)
+		mui.init();
+//		mui.ready(function(){
+//			alert(123)
+//		})
+		mui.plusReady(function() {
+			var mobileStr = common.getLocVal('mobile');
+//			console.log(mobileStr)
+//			console.log(mobileStr.slice(-4))
+//			console.log(mobileStr.slice(0,3))
+			//获取手机号隐藏中间
+			jQuery('.show-mobile').html(mobileStr.slice(0,3)+'****'+mobileStr.slice(-4));
+		});
+		
+		mui('._customer').on('tap', 'a', function(e) {
+			mui.openWindow({
+			    url: '../components/customer.html', 
+			    id:'customer'
+			  });
+		})
+		mui('.install').on('tap', 'a', function(e) {
+			mui.openWindow({
+			    url: '../components/install.html', 
+			    id:'install'
+			  });
+		})
+		mui('.mi_login').on('tap', 'a', function(e) {
+			mui.openWindow({
+			    url: '../components/login.html', 
+			    id:'login'
+			  });
+		})
+		mui('.mi_real').on('tap', 'a', function(e) {
+			mui.openWindow({
+			    url: '../components/real.html', 
+			    id:'real'
+			  });
+		})
+    </script>
+</body>
+</html>

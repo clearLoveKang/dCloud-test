@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    <style type="text/css">
+    	.mui-poppicker-btn-ok{
+    		background: #02b6f1;
+    		border: 1px solid #02b6f1;
+    	}
+    </style>
+</head>
+<body>
+	<div class="mui-content door-container">
+		<header class="mui-bar mui-bar-transparent">
+			<h1 class="mui-title _title">我要开门</h1>
+		</header>
+		<div class="checkDoor">
+			<div class="doorInfo" id='showUserPicker'>
+				<span id="userResult">点击选择更多房源</span>
+				<span class="mui-icon mui-icon-arrowright door-icon"></span>
+			</div>
+		</div>
+		<div class="mui-slider">
+		  <div class="mui-slider-group">
+		    <div class="mui-slider-item">
+		    	<div class="_swiper-container">
+		    		<!--66666666-->
+		    		<a class="door-img door-img-open" id="22222222">
+		    			<p class="door-msg">无效门锁</p>
+		    			<p class="door-worn"></p>
+		    		</a>
+		    		<!--<img class="door-img" src="../img/door/door.png"/>-->
+		    		<p class="door-name">
+		    			还未绑定门锁
+		    		</p>
+		    		<div class="dev-info">
+		    			<div class="dev-line">
+		    				<span class="mui-icon iconfont icon-xinxinicon icon-color">
+		    					<span class="dev _line">0%</span>
+		    				</span>
+		    			</div>
+		    			<div class="dev-signal">
+		    				<span class="mui-icon iconfont icon-xinhao-01-copy icon-color">
+		    					<span class="dev">无</span>
+		    				</span>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/common.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	mui.init();
+		var showUserPickerButton = document.getElementById('showUserPicker');
+		var userResult = document.getElementById('userResult');
+		//提前获取缓存房源门锁信息
+		mui.plusReady(function() {
+			rmbInfo();
+		});
+		showUserPickerButton.addEventListener('tap', function(event) {
+			//判断登录
+			if (common.getLocVal('token')) {
+				//获取房源数据
+				var params = {};
+			 	var data= {};
+			 	params['url'] = 'miapi//?service=Lock.GetHasLockBuilding';
+			 	data['id'] = common.getLocVal('user_id');
+			 	params['data'] = data;
+			 	console.info(params);
+				common.otherPost(params, showLock);
+			} else{
+				mui.openWindow({
+				    url: '../components/login.html', 
+				    id:'login'
+				});
+			}
+		}, false);
+		//处理房源数据
+		function showLock(data){
+			console.info(JSON.stringify(data))
+			if (data.data.code == 0) {
+				//普通示例
+				var userPicker = new mui.PopPicker();
+				//处理返回数据
+				var Lock = [];
+				for (var i=0; i<data.data.info.length;i++) {
+					var Lock_list = {};
+					Lock_list.value = data.data.info[i].id;
+					Lock_list.text = data.data.info[i].house_name+data.data.info[i].address;
+					Lock[i] = Lock_list;
+					console.info(JSON.stringify(Lock.concat()))
+				}
+				console.info(JSON.stringify(Lock))
+				//无房源列表数据提示
+				if (!Lock.length) {
+					common.alert("提示", data.data.msg);
+				} else{
+					userPicker.setData(Lock);
+					userPicker.show(function(items) {
+							console.log(JSON.stringify(items))
+							userResult.innerText = items[0].text;
+							//记录房源信息
+							common.setLocVal('userResult',items[0].text)
+							//获取门锁数据
+							var params = {};
+						 	var data= {};
+						 	params['url'] = 'miapi//?service=Lock.GetAllLocks';
+						 	data['id'] = common.getLocVal('user_id');
+						 	data['houseId'] = items[0].value;
+						 	params['data'] = data;
+						 	console.info(params);
+							common.otherPost(params, showAllLocks);
+						});
+				}
+			} else{
+				common.alert("提示", data.data.msg);
+			}
+			
+		}
+		function showAllLocks(data){
+			console.info(JSON.stringify(data));
+			jQuery('.mui-slider-group').empty();
+			//处理锁数据展示锁子
+			for (var i=0; i<data.data.info.length;i++) {
+				//单独处理科技侠信息
+				var electric = data.data.info[i].electric?data.data.info[i].electric:0;
+				var rssi_str = data.data.info[i].rssi_str?data.data.info[i].rssi_str:'强';
+				var lockList = '<div class="mui-slider-item">'
+							    	+'<div class="_swiper-container">'
+							    		+'<a class="door-img door-img-open" type="'+data.data.info[i].brand_id+'" id="'+data.data.info[i].lockId+'">'
+							    			+'<p class="door-msg">点击开门</p>'
+							    			+'<p class="door-worn"></p>'
+							    		+'</a>'
+							    		+'<p class="door-name">'+data.data.info[i].lockname+'</p>'
+							    		+'<div class="dev-info">'
+							    			+'<div class="dev-line">'
+							    				+'<span class="mui-icon iconfont icon-xinxinicon icon-color">'
+							    					+'<span class="dev _line">'+electric+'%</span>'
+							    				+'</span></div>'
+							    			+'<div class="dev-signal">'
+							    				+'<span class="mui-icon iconfont icon-xinhao-01-copy icon-color">'
+							    					+'<span class="dev">'+rssi_str+'</span>'
+							    				+'</span>'
+							    			+'</div>'
+							    		+'</div>'
+							    	+'</div>'
+							    +'</div>';
+							    
+				    if (data.data.info.length) {
+				    	jQuery('.mui-slider-group').append(lockList)
+				    }
+			}
+			//记录门锁信息
+					common.setLocVal('resultList',lockList)
+			//初始化轮播
+			    var gallery = mui('.mui-slider');
+				gallery.slider({
+				  interval:0//自动轮播周期，若为0则不自动播放，默认为0；
+				});
+			
+			
+		};
+		
+		//记录当前锁子
+		var _lock = '';
+		mui("body").on('tap','.door-img',function(event){
+			if (common.getLocVal('token')) {
+				//			jQuery(this).removeClass('door-img-open');
+				_lock = jQuery(this);
+				var id = common.getLocVal('user_id');//this.getAttribute("type");
+			 	var lockId = this.getAttribute("id");//common.getLocVal('user_id');
+				console.log(id+lockId)
+				console.log(this.getAttribute("type"))
+				//获取门锁数据
+				var params = {};
+			 	var data= {};
+			 	///miapi//?service=Lock.SendPasswd 丁盯科技侠获取动态密码的接口 
+			 	if (this.getAttribute("type") == 1) {
+			 		params['url'] = 'miapi//?service=Lock.OpenLock';
+			 	} else{
+			 		params['url'] = 'miapi//?service=Lock.SendPasswd';
+			 	}
+			 	
+			 	data['id'] = common.getLocVal('user_id');
+			 	data['lockId'] = lockId;
+			 	params['data'] = data;
+			 	console.info(params);
+				common.otherPost(params, openLocks);
+			} else{
+				mui.openWindow({
+				    url: '../components/login.html', 
+				    id:'login'
+				});
+			}
+
+		}) 
+		
+
+		
+		function openLocks(data){
+			console.info(JSON.stringify(data))
+			if(data.data.code == 0){
+				_lock.removeClass('door-img-open');
+				_lock.find('.door-msg').html('开门成功');
+				_lock.find('.door-worn').html('请拧门把手')
+				if (_lock.attr("type") == 1) {
+					common.alert("提示", '开锁成功,请拧门把手!');
+				} else{
+					common.alert("开锁密码", data.data.info);
+				}
+				
+				setTimeout(function(){
+					_lock.addClass('door-img-open');
+					_lock.find('.door-msg').html('点击开门');
+					_lock.find('.door-worn').html('')
+				},5000)
+			}else{
+				common.alert("提示", data.data.msg);
+			}
+//			common.alert("提示", data.message);
+		}
+  		
+  		//记录最近房源信息哦
+  		function rmbInfo(){
+  			if (common.getLocVal('userResult') && common.getLocVal('resultList')) {
+  				userResult.innerText = common.getLocVal('userResult');
+  				jQuery('.mui-slider-group').empty().append(common.getLocVal('resultList'));
+  			} 
+  		}
+    </script>
+</body>
+</html>

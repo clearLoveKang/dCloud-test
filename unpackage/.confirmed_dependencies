@@ -1,0 +1,131 @@
+{
+  "components/login.html": {
+    "href": "components/login.html",
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/app.css",
+      "img/login/logo.png",
+      "img/home/ic_tab_my.png",
+      "components/center.html",
+      "fonts/mui.ttf",
+      "img/login/sms.png",
+      "img/login/tel.png",
+      "js/libs/lodash.js",
+      "js/common.js",
+      "js/jquery-1.10.2.min.js",
+      "js/libs/jquery.md5.js"
+    ],
+    "refer": [
+      "components/center.html",
+      "components/real.html"
+    ],
+    "priority": 0
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/app.css",
+      "img/icon/phone_bj.png",
+      "img/icon/lxkf.png",
+      "img/icon/sz.png",
+      "img/icon/kjx.png",
+      "components/openPage.html",
+      "fonts/mui.ttf",
+      "components/center.html",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "js/common.js",
+      "js/update.js"
+    ],
+    "refer": [
+      "components/login.html",
+      "components/openPage.html",
+      "components/center.html"
+    ],
+    "priority": 0
+  },
+  "components/center.html": {
+    "resources": [
+      "css/app.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "img/icon/phone_bj.png",
+      "img/icon/lxkf.png",
+      "img/icon/kjx.png",
+      "img/icon/sz.png",
+      "components/login.html",
+      "js/libs/lodash.js",
+      "js/common.js",
+      "js/jquery-1.10.2.min.js",
+      "js/libs/jquery.md5.js"
+    ],
+    "refer": [
+      "components/login.html",
+      "components/real.html",
+      "components/customer.html",
+      "components/install.html"
+    ]
+  },
+  "components/openPage.html": {
+    "resources": [
+      "css/app.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "img/door/door.png",
+      "js/mui.picker.js",
+      "css/mui.picker.css",
+      "js/mui.picker.min.js",
+      "css/mui.poppicker.css",
+      "js/mui.poppicker.js",
+      "img/door/door-open.png",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "js/common.js",
+      "js/jquery-1.10.2.min.js",
+      "js/libs/jquery.md5.js",
+      "js/libs/lodash.js"
+    ],
+    "refer": [
+      "components/login.html"
+    ]
+  },
+  "components/real.html": {
+    "resources": [
+      "img/login/real.png",
+      "css/app.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/libs/lodash.js",
+      "js/common.js",
+      "js/jquery-1.10.2.min.js",
+      "js/libs/jquery.md5.js"
+    ],
+    "refer": []
+  },
+  "components/about.html": {
+    "resources": [
+      "img/login/logo.png"
+    ]
+  },
+  "components/install.html": {
+    "refer": [
+      "components/about.html"
+    ],
+    "resources": [
+      "js/libs/lodash.js",
+      "js/common.js",
+      "css/app.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/jquery-1.10.2.min.js",
+      "js/libs/jquery.md5.js"
+    ]
+  }
+}

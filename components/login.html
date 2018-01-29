@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<div class="container">
+		<header class="mui-bar mui-bar-transparent">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #02b6f1;"></a>
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="logo">
+			<img src="../img/login/logo.png"/>
+		</div>
+		<div class="loginForm">
+			<div class="formItem">
+				<label for="uName">
+					<img src="../img/login/tel.png"/>
+					<input style="width: 90%;" type="tel" placeholder="手机号" name="uName" id="uName" value=""/>
+				</label>
+			</div>
+			<div class="formItem">
+				<label for="uPass">
+					<img src="../img/login/sms.png"/>
+					<input type="tel" placeholder="动态密码" name="uPass" id="uPass" value=""/>
+				</label>
+				<span class="getCode">获取动态密码</span>
+			</div>
+			<button type="button" class="mui-btn btn">注册/登陆</button>
+			<!--<p class="btn">
+				注册/登陆
+			</p>-->
+			<!--<span class="check">
+				<input type="checkbox" name="" id="check" value="" />
+				我已阅读并同意《用户服务协议》
+			</span>-->
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/common.js" ></script>
+	<script type="text/javascript">
+		//		mui(".getCode").on('tap',function(event){
+//			alert(123)
+//		})
+		mui.init();
+		//倒计时
+		var wait=60;  
+		function time(o) {  
+		        if (wait == 0) {  
+//		            o.removeAttribute("disabled");            
+		            o.innerHTML="获取动态密码";  
+		            wait = 60;  
+		        } else {  
+//		            o.setAttribute("disabled", true);  
+		            o.innerHTML="重新发送(" + wait + ")";  
+		            wait--;  
+		            setTimeout(function() {  
+		                time(o)  
+		            },  
+		            1000)  
+		        }  
+		    }  
+		//验证码
+		jQuery('.getCode').click(function(){
+			console.info(jQuery('#uName').val());
+			if (common.isEmpty(jQuery('#uName').val())) {
+				if (common.isTelphone(jQuery('#uName').val())) {
+					if (wait == 0 || wait == 60) {
+						time(this);
+						var params = {};
+					 	var data= {};
+					 	params['url'] = '/index.php/api/user/sendMessageCode';
+					 	data['phone'] = jQuery('#uName').val();
+					 	data['type'] = 4;
+					 	data['sign'] = common.generateSign(data);
+					 	params['data'] = data;
+					 	console.info(params);
+						common.JsonPost(params, getCode);
+					} else{
+						common.toast('请不要重复发送')
+					}
+					
+				} else{
+					common.toast('手机号格式不正确')
+				}
+			} else{
+				common.toast('请输入手机号码')
+			}
+			
+			
+		})
+		function getCode(data){
+			console.info(JSON.stringify(data))
+		}
+		//登录
+		jQuery('.btn').click(function(){
+			console.info(jQuery('#uName').val());
+			if (common.isEmpty(jQuery('#uName').val())) {
+				if (common.isTelphone(jQuery('#uName').val())) {
+					if (common.isEmpty(jQuery('#uPass').val())) {
+						var params = {};
+					 	var data= {};
+					 	params['url'] = '/index.php/api/user/loginForApp';
+					 	data['phone'] = jQuery('#uName').val();
+					 	data['vcode'] = jQuery('#uPass').val();
+					 	data['sign'] = common.generateSign(data);
+					 	params['data'] = data;
+					 	console.info(params);
+						common.JsonPost(params, goLogin);
+					} else{
+						common.toast('请输入验证码')
+					}
+				} else{
+					common.toast('手机号格式不正确')
+				}
+			} else{
+				common.toast('请输入手机号码')
+			}
+				
+			
+			
+		})
+		function goLogin(data){
+			console.info(JSON.stringify(data))
+			if (data.code == 200) {
+				common.setLocVal('token',data.data.token)
+				common.setLocVal('user_id',data.data.user_id)
+				common.setLocVal('mobile',data.data.mobile)
+				common.setLocVal('name',data.data.name)
+				common.setLocVal('idcard',data.data.cardno)
+				common.setLocVal('resultList','')
+				if (data.data.namestate !== '10') {
+//					plus.webview.close('login','none');
+					mui.openWindow({
+					    url: '../components/real.html', 
+					    id:'real'
+					  });
+				} else{
+					common.goBackRoot();
+				}
+			} else{
+				common.alert("提示", data.message);
+			}
+//			mui.back()
+		}
+
+	</script>
+</body>
+</html>
